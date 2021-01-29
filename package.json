@@ -1,0 +1,23 @@
+{
+  "name": "munchkin",
+  "version": "1.0.0",
+  "description": "Браузерна гра \"Манчкин\". \r Розробляють такі люди: \r Шидловський Максим, Воронов Іван, Рябенко Влад, Парфенюк Ілля",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaximusBro/Munchkin.git"
+  },
+  "author": "IT-Wolfs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaximusBro/Munchkin/issues"
+  },
+  "homepage": "https://github.com/MaximusBro/Munchkin#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.0"
+  }
+}
