@@ -1,11 +1,19 @@
-// Підключення модулів необхідних для запуску сайта і бекенду
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io');
-//Кінець
-server.listen(3000);                      //Прописано який порт буде відслідковувати сервер
+const express = require('express');
+const app = express();
+const path = require('path');
+const port = process.env.PORT || 3000;
 
-app.get('/',function (request,respons) {  //request = Запрос; respons =  ответ
-    respons.sendFile(__dirname + '/index.html');          // Дозволяэ відправити деякий файл (__dirname = деректорыя в якій ми знаходимся)
-});// Який URL-фдрес ми відслідковіємо
+//
+const server = require('http').Server(app); //
+app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
+//
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+app.get('/about', function(req, res) {
+    res.sendFile(path.join(__dirname + '/about.html'));
+});
+app.get('/game', function(req, res) {
+    res.sendFile(path.join(__dirname + '/game.html'));
+});
