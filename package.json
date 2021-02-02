@@ -4,7 +4,7 @@
   "description": "Браузерна гра \"Манчкин\". \r Розробляють такі люди: \r Шидловський Максим, Воронов Іван, Рябенко Влад, Парфенюк Ілля",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
