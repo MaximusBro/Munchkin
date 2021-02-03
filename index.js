@@ -10,7 +10,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 var server = app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
-app.use(express.static("./views"));
+app.use('/public', express.static('public'));
 
 var io = require('socket.io')(server);
 
@@ -21,14 +21,12 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function (req, res) {
-    var path = __dirname + '/game.html';
-    console.log(path);
-    res.sendFile(path);
+    res.sendFile(__dirname + '/game.html');
 });
 
 app.post("/start_game", urlencodedParser, function (req, res) {
     if(!req.body) return res.sendStatus(400);
-    res.sendFile(__dirname + '/views/start_game.html');
+    res.sendFile(__dirname + '/start_game.html');
 });
 var players = []
 io.on('connection', function(socket) {
