@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munchkin</title>
+<style>
+    #box1 { 
+    background: #aace28; /* Цвет фона */
+    width: 500px; /* Ширина блока */
+    padding: 10px; /* Поля */
+    border: 2px solid #000; /* Параметры рамки */
+    }
+    #box2 { 
+    background: rgb(42, 207, 212); /* Цвет фона */
+    width: 500px; /* Ширина блока */
+    padding: 10px; /* Поля */
+    margin-top: 10px; /* Отступ сверху */
+    border: 2px solid #000; /* Параметры рамки */
+    -moz-box-sizing: border-box; /* Для Firefox */  
+    box-sizing: border-box; /* Ширина блока с полями */
+   }
+   #PLAYER_BOX{
+    border: 15px solid darkorange;
+    width: 400px;
+  padding: 150px;
+  margin: 10px;
+   }
+   #PLAYER_BOX2{
+    border: 15px solid darkorange;
+    width: 400px;
+  padding: 150px;
+  margin-left: 40%;
+  
+   }
+</style>
+</head>
+
+<body>
+<h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
+<button class="button-1" >Начать игру</button>
+<div>
+<p>Players - <span id ="players"></span></p>
+</div>
+<!--PLAYERSBOX-->
+<div class ="Player tabs">
+    <div>
+        <p><span id="box1">Name1</span></p>
+        
+        <p><span id="box2">PLAYER TAB</span></p><br>
+    </div>
+
+    <div>
+    <p><span id="box1">Name2</span></p>
+    <p><span id="box2">PLAYER TAB</span></p><br>
+    </div>
+
+    <div>
+        <p><span id="box1">Name3</span></p>
+        <p><span id="box2">PLAYER TAB</span></p>
+    </div>
+<!--END-->
+
+</div>
+    <!--MAIN_PLAYER-->
+    <div>   
+
+        <div id="PLAYER_BOX">
+          
+        </div>
+        <div id ="PLAYER_BOX2">
+
+        </div>
+
+    </div> 
+    <!--END-->
+
+
+</body>
+</html>
