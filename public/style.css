@@ -11,11 +11,14 @@ body {
    }
 
    .avatar {
-vertical-align: middle;
-width: 250px;
+top: 70%;
+left: 10%;
+z-index: 50;
+position: absolute;
+/* width: 250px;
 height:250px;
 margin-top: -70px;
-margin-left: -10px;
+margin-left: -10px;*/
 }
     .avatar2 {
 vertical-align: middle;
