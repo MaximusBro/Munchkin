@@ -6,33 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Munchkin</title>
 <style>
-    #box1 { 
+    #box1 {
     background: #aace28; /* Цвет фона */
     width: 500px; /* Ширина блока */
     padding: 10px; /* Поля */
     border: 2px solid #000; /* Параметры рамки */
     }
-    #box2 { 
+    #box2 {
     background: rgb(42, 207, 212); /* Цвет фона */
     width: 500px; /* Ширина блока */
     padding: 10px; /* Поля */
     margin-top: 10px; /* Отступ сверху */
-    border: 2px solid #000; /* Параметры рамки */   
-    -moz-box-sizing: border-box; /* Для Firefox */  
+    border: 2px solid #000; /* Параметры рамки */
+    -moz-box-sizing: border-box; /* Для Firefox */
     box-sizing: border-box; /* Ширина блока с полями */
    }
    #PLAYER_BOX{
     border: 15px solid darkorange;
     width: 400px;
   padding: 150px;
-  
+
   display: inline-block;
    }
    #PLAYER_BOX2{
     border: 15px solid darkorange;
     width: 400px;
   padding: 150px;
-  
+
   display: inline-block;
    }
 </style>
@@ -40,15 +40,19 @@
 
 <body>
 <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
+<form action="/munchkin_set_password" method="post">
+  <input  placeholder="set password" name = pass>
+  <button type="submit" id="open_room">open room</button>
+</form>
 <button class="button-1" >Начать игру</button>
 <div>
 <p>Players - <span id ="players"></span></p>
+  <input type="text" name="" value="Введите ник" id="name"> <button type="submit" name="button" >Задать ник</button>
 </div>
 <!--PLAYERSBOX-->
 <div class ="Player tabs">
     <div>
-        <p><span id="box1">Name1</span></p>
-        
+        <p><span id="box1"><span id="name1">Name1</span></span></p>
         <p><span id="box2">PLAYER TAB</span></p><br>
     </div>
 
@@ -65,28 +69,35 @@
 
 </div>
     <!--MAIN_PLAYER-->
-    <div>   
+    <div>
 
         <div id="PLAYER_BOX">
-          
+
         </div>
         <div id ="PLAYER_BOX2">
 
         </div>
 
-    </div> 
+    </div>
     <!--END-->
     <!-- Скріпти -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
     <script>
-    $(function () {
+    // $(function () {
       var socket = io.connect('/');
 
       socket.on('players_in_room',function (players) {
         $('#players').text(players);
       });
-      });
+      // });
+      // function SetName() {
+      //   socket.emit('send_name',$('#name').val())
+      //   socket.on('set_name',function (name) {
+      //     $('#name1').text(name);
+      //   });
+      // }
+
     </script>
 
 

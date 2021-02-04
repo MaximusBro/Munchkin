@@ -9,12 +9,15 @@
 </head>
 
 <body>
-
     <table align="center">
     <tr><th><img id ="option" src="public/img/настройка иконка.png" alt="Максим съел фотографию" ></th>
     <th><h1 id="top"align="center">Munchkin</h1>
       <br>
       <p>Игроков в комнате - <span id="players"></span></p><br>
+      <br>
+        <input type="text" id="name">
+        <button type="submit" name="button" id="set_nikname" onclick="SetName()">Set Nikname</button>
+        <p>Ваш ник - <span id="set_name"></span></p>
     </th></tr>
     </table>
      <!--Рамки и всё для перса аватаров игроков-->>
@@ -28,12 +31,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
     <script>
+    function SetName() {
+      socket.emit('send_name',$('#name').val())
+    }
     $(function () {
       var socket = io.connect('/');
 
       socket.on('players_in_room',function (players) {
         $('#players').text(players);
       });
+      socket.on('set_name',function (par) {
+        $('#set_name').text(par);
+      });
+
       });
     </script>
 
