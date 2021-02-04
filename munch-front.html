@@ -27,18 +27,20 @@
     -moz-box-sizing: border-box; /* Для Firefox */
     box-sizing: border-box; /* Ширина блока с полями */
    }
+   .d{
+     display: inline-block;
+   }
    #PLAYER_BOX{
+     background-size: 100%;
      float: left;
-    border: 15px solid darkorange;
+     border: 15px solid darkorange;
   	/* padding: 150px; */
-  	/* display: inline-block; */
+  	 display: inline-block;
    }
    #PLAYER_BOX2{
      float: left;
     border: 15px solid darkorange;
-
-  	/* padding: 150px; */
-  	/* display: inline-block; */
+  	display: inline-block;
    }
 
    .door{
@@ -115,7 +117,18 @@
 </div>
     <!--MAIN_PLAYER-->
     <div align="left">
-        <div id="PLAYER_BOX"></div>
+        <div id="PLAYER_BOX" align="left">
+          <div class="d" id="0" align="left"></div>
+          <div class="d" id="1" align="left"></div>
+          <div class="d" id="2" align="left"></div>
+          <div class="d" id="3" align="left"></div>
+          <div class="d" id="4" align="left"></div>
+          <div class="d" id="5" align="left"></div>
+          <div class="d" id="6" align="left"></div>
+          <div class="d" id="7" align="left"></div>
+          <div class="d" id="8" align="left"></div>
+          <div class="d" id="9" align="left"></div>
+        </div>
         <div id="PLAYER_BOX2"></div>
     </div>
 <div class="name_">
@@ -139,7 +152,15 @@
     $('#players').text(players);
   });
   socket.on('new_door_card',function (card) {
-    SetCard(card);
+    $('#PLAYER_BOX img').remove();
+    SetCard(card).forEach((item, i) => {
+      var divID = '#'+i;
+      $(divID).append('<img>');
+      divID +=' img';
+      $(divID).attr('src', item);
+      console.log(item);
+    });
+
     // var card_img = "public/brown/"+card;
     // $('#PLAYER_BOX').append('<img>');
     // $('#PLAYER_BOX img').attr('src', card_img);
@@ -174,8 +195,9 @@ function DownDamage() {
   socket.emit('down_damage')
 }
 var cardInHand = [];
-function SetCard() {
+function SetCard(card) {
   cardInHand.push("public/brown/"+card);
+  return cardInHand;
 }
 
 </script>
