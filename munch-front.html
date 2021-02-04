@@ -8,7 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <style>
     body {
-    overflow: hidden
+    overflow: hidden;
+    background-image: url(public/img/фон.jpg);
+    background-size: 100%;
    }
     #box1 {
     background: #aace28; /* Цвет фона */
@@ -27,18 +29,56 @@
    }
    #PLAYER_BOX{
     border: 15px solid darkorange;
-    width: 400px;
-  padding: 150px;
-
-  display: inline-block;
+    width: 200px;
+  	padding: 150px;
+  	margin-top: 5%;
+  	display: inline-block;
    }
    #PLAYER_BOX2{
     border: 15px solid darkorange;
-    width: 400px;
-  padding: 150px;
-
-  display: inline-block;
+    width: 200px;
+  	padding: 150px;
+  	display: inline-block;
    }
+
+   .door{
+   	margin-left: auto;
+   }
+   img{
+   	vertical-align: middle;
+   	width: 200px;
+	height:250px;
+   	margin-top: -200px;
+   	margin-left: 35%;
+   }
+   .name_{
+    border: 10px solid darkorange;
+    margin-left: 65%;
+    margin-top: -19%;
+    height: 40px;
+    width: 350px;
+  	padding: 20px;
+ 
+   }
+   .lvl-damage{
+    border: 10px solid darkorange;
+    margin-left: 65%;
+    margin-top: 1%;
+    height: 40px;
+    width: 350px;
+  	padding: 20px;
+   }
+   .table{
+   	background-image: url(public/img/стол.jpg);
+   	background-size: 100%;
+   	border: 10px solid darkorange;
+   	padding: 150px;
+   	height: 60px;
+   	width: 200px;
+   	margin-left: 60%;
+   	margin-top: -40%;
+   }
+
 </style>
 </head>
 
@@ -67,25 +107,27 @@
 <!--END-->
 
 </div>
+
+<img src="public/gold/Сокровище.png" >
+<img src="public/brown/Дверь.png" class="door">
     <!--MAIN_PLAYER-->
     <div>
-
-        <div id="PLAYER_BOX">
-
-        </div>
-        <div id ="PLAYER_BOX2">
-
-        </div>
-
+        <div id="PLAYER_BOX"></div>
+        <div id="PLAYER_BOX2"></div>
     </div>
+
+<div class="name_">Name</div>
+<div class="lvl-damage">LVL</div>
+<div class="lvl-damage">Damage</div>
+<div class="table"></div>
     <!--END-->
     <!--JQUERY SCRIPTS-->
-    <script>
+    <!--<script>
        var nick = $('#name');
        Function
        alert(nick);
     </script>
-    
+    -->
 
 
 </body>
