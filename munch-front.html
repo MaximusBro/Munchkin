@@ -14,6 +14,7 @@
    }
     #box1 {
     background: #aace28; /* Цвет фона */
+    width: 500px; /* Ширина блока */
     padding: 10px; /* Поля */
     border: 2px solid #000; /* Параметры рамки */
     }
@@ -25,7 +26,7 @@
     border: 2px solid #000; /* Параметры рамки */
     -moz-box-sizing: border-box; /* Для Firefox */
     box-sizing: border-box; /* Ширина блока с полями */
-	}
+   }
    #PLAYER_BOX{
     border: 15px solid darkorange;
     width: 200px;
@@ -51,21 +52,21 @@
    	margin-left: 35%;
    }
    .name_{
-    border: 5px solid darkorange;
+    border: 10px solid darkorange;
     margin-left: 65%;
-    margin-top: -10%;
+    margin-top: -19%;
     height: 40px;
-    width: 250px;
-  	padding: 5px;
+    width: 350px;
+  	padding: 20px;
 
    }
    .lvl-damage{
-    border: 5px solid darkorange;
+    border: 10px solid darkorange;
     margin-left: 65%;
-    margin-top: auto;
+    margin-top: 1%;
     height: 40px;
-    width: 250px;
-  	padding: 5px;
+    width: 350px;
+  	padding: 20px;
    }
    .table{
    	background-image: url(public/img/стол.jpg);
@@ -77,23 +78,6 @@
    	margin-left: 60%;
    	margin-top: -40%;
    }
-   .ontable{
-   	border: 10px solid darkred;
-   	padding: 54px;
-   	width: 393px;
-   	height: 60px;
-   	margin-left: 60%;
-   	margin-top: -10%;
-   }
-   .shrift {
-   font-family: 'Tenor Sans', sans-serif;
-   font-size: 26px;
-   color: #FFF8DC;
-   letter-spacing: 2px;
-   line-height: 1.4em;
-   text-transform: uppercase;
-   margin-bottom: 0;
-}
 
 </style>
 </head>
@@ -112,20 +96,20 @@
   </form>
 </div>
 <!--PLAYERSBOX-->
-
+<div class ="Player tabs">
     <div>
         <p><span id="box1"><span id="name1">Name1</span></span></p>
-        <p><span id="box2"></span></p>
+        <p><span id="box2">PLAYER TAB</span></p><br>
     </div>
 
     <div>
     <p><span id="box1">Name2</span></p>
-    <p><span id="box2"></span></p>
+    <p><span id="box2">PLAYER TAB</span></p><br>
     </div>
 
 <!--END-->
 
-
+</div>
 
 <img src="public/gold/Сокровище.png" >
 <img onclick="GetDoor()" src="public/brown/Дверь.png" class="door">
@@ -135,13 +119,10 @@
         <div id="PLAYER_BOX2"></div>
     </div>
 
-<div class="name_ shrift" id="player_name">Name</div>
-<div class="lvl-damage shrift">LVL - <span id="lvl"></span> </div>
-<div class="lvl-damage shrift">Damage - <span id="damage"></span> </div>
-<div>
+<div class="name_" id="player_name" color="red">Name</div>
+<div class="lvl-damage">LVL - <span id="lvl"></span> </div>
+<div class="lvl-damage">Damage - <span id="damage"></span> </div>
 <div class="table"> <span id="stol" ></span> </div>
-<div class="ontable"></div>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
 <script>
@@ -154,8 +135,13 @@
   socket.on('players_in_room',function (players) {
     $('#players').text(players);
   });
-  socket.on('new_card',function (card) {
-      $('#stol').text(card.type+", "+card.level+", "+card.damage);
+  socket.on('new_door_card',function (card) {
+    console.log(card);
+      var card_img = "public/brown/"+card;
+      console.log("img2");
+      $('#stol').append('<img>');
+      $('#stol img').attr('src', card_img);
+      console.log("img3");
   });
   socket.on('set_nick', function (pl) {
     pl.forEach((item, i) => {

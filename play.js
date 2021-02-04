@@ -3,8 +3,11 @@ function shuffle(array) {
 }
 var door = [];
 var gold = [];
-for (var i = 1; i <= 74; i++) {
+for (var i = 1; i <= 73; i++) {
   door.push(i + ".png")
+}
+for (var i = 1; i <= 74; i++) {
+  gold.push(i + ".png")
 }
 players = [];
 shuffle(door);
