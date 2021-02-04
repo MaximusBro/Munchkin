@@ -19,7 +19,7 @@ module.exports = {
       players.push(id);
       console.log(players.length);
     },
-    getName: function () {
+    getInfo: function () {
         return players;
     },
     getDoor: function () {
@@ -33,6 +33,34 @@ module.exports = {
         if (id == item.id) {
           item.name = nick;
           console.log(item.name);
+        }
+      });
+    },
+    UpLvl: function (id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.level += 1;
+        }
+      });
+    },
+    UpDamage: function (id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.damage += 1;
+        }
+      });
+    },
+    DownLvl:function (id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.level -= 1;
+        }
+      });
+    },
+    DownDamage:function (id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.damage -= 1;
         }
       });
     },

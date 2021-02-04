@@ -54,7 +54,7 @@ app.post("/munchkin_set_password", urlencodedParser, function (req, res) {
 var password = "";
 io.on('connection', function(socket) {
     // const userId = await fetchUserId(socket);
-    play.pushPlayer({type:'player',id : socket.id, level: 1,name:"",card_on_hand:{},card_to_table:{}});
+    play.pushPlayer({type:'player',id : socket.id, level: 1,name:"",damage: 1});
     //
     io.emit('players_in_room',players.length);
     socket.on('disconnect', function () {
@@ -62,12 +62,30 @@ io.on('connection', function(socket) {
     console.log("disconnected");
     io.emit('players_in_room',players.length);
     });
-    socket.on('Send_nick_', function (nick) {
+    socket.on('Send_info', function (nick) {
       play.pushNick(nick,socket.id);
-      io.emit('set_nick', play.getName());
+      io.emit('set_info', play.getInfo());
       play.printPlayer();
       console.log("Send_nick complite");
     })
+
+    socket.on('up_lvl',function () {
+      play.UpLvl(socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('up_damage',function () {
+      play.UpDamage(socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('down_lvl',function () {
+      play.DownLvl(socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('down_damage',function () {
+      play.DownDamage(socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+
     socket.on('get_door', function () {
       io.emit('new_door_card',play.getDoor())
     });

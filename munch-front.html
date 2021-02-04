@@ -28,60 +28,59 @@
     box-sizing: border-box; /* Ширина блока с полями */
    }
    #PLAYER_BOX{
+     float: left;
     border: 15px solid darkorange;
-    width: 200px;
-  	padding: 150px;
-  	margin-top: 5%;
-  	display: inline-block;
+  	/* padding: 150px; */
+  	/* display: inline-block; */
    }
    #PLAYER_BOX2{
+     float: left;
     border: 15px solid darkorange;
-    width: 200px;
-  	padding: 150px;
-  	display: inline-block;
+
+  	/* padding: 150px; */
+  	/* display: inline-block; */
    }
 
    .door{
    	margin-left: auto;
    }
-   img{
-   	vertical-align: middle;
-   	width: 200px;
-	height:250px;
-   	margin-top: -200px;
-   	margin-left: 35%;
-   }
-   .name_{
-    border: 10px solid darkorange;
-    margin-left: 65%;
-    margin-top: -19%;
-    height: 40px;
-    width: 350px;
-  	padding: 20px;
+   #rub{
+   	position: absolute;
+    right: 550px;
+    top: 80px;
 
    }
-   .lvl-damage{
-    border: 10px solid darkorange;
-    margin-left: 65%;
-    margin-top: 1%;
-    height: 40px;
-    width: 350px;
-  	padding: 20px;
+   .name_{
+     position: absolute;
+     right: 5px;
+     bottom: 5px;
+   }
+   .n1{
+     color: red;
+     font-size: 22px;
+     border: 4px solid black;
    }
    .table{
+     position: absolute;
+     right: 1%;
+     top: 1%;
    	background-image: url(public/img/стол.jpg);
    	background-size: 100%;
    	border: 10px solid darkorange;
    	padding: 150px;
-   	height: 60px;
+   	height: 80px;
    	width: 200px;
-   	margin-left: 60%;
-   	margin-top: -40%;
+   	/* margin-left: 60%;
+   	margin-top: -40%; */
+   }
+   #stol{
+     position:absolute;
+     left:30px;
+     bottom: 1%
    }
 
 </style>
 </head>
-
 <body>
 <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
 <button class="button-1" >Начать игру</button>
@@ -110,40 +109,42 @@
 <!--END-->
 
 </div>
-
-<img src="public/gold/Сокровище.png" >
-<img onclick="GetDoor()" src="public/brown/Дверь.png" class="door">
+<div id="rub">
+  <img  onclick="GetGold()" src="public/gold/Сокровище.png" >
+  <img  onclick="GetDoor()" src="public/brown/Дверь.png" class="door">
+</div>
     <!--MAIN_PLAYER-->
-    <div>
+    <div align="left">
         <div id="PLAYER_BOX"></div>
         <div id="PLAYER_BOX2"></div>
     </div>
-
-<div class="name_" id="player_name" color="red">Name</div>
-<div class="lvl-damage">LVL - <span id="lvl"></span> </div>
-<div class="lvl-damage">Damage - <span id="damage"></span> </div>
+<div class="name_">
+  <div class="n1" id="player_name" color="red">Name</div>
+  <div class="n1">LVL : <span id="lvl"></span>
+    <button type="submit" onclick="UpLVL()">+1</button>
+    <button type="submit" onclick="DownLVL()">-1</button>
+  </div>
+  <div class="n1">Damage : <span id="damage"></span>
+    <button type="submit" onclick="UpDamage()">+1</button>
+    <button type="submit" onclick="DownDamage()">-1</button>
+  </div>
+</div>
 <div class="table"> <span id="stol" ></span> </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
 <script>
-// $("button").click(function( event ) {
-//   event.preventDefault();
-// });
-// $(function () {
   var socket = io.connect('/');
 
   socket.on('players_in_room',function (players) {
     $('#players').text(players);
   });
   socket.on('new_door_card',function (card) {
-    console.log(card);
-      var card_img = "public/brown/"+card;
-      console.log("img2");
-      $('#stol').append('<img>');
-      $('#stol img').attr('src', card_img);
-      console.log("img3");
+    SetCard(card);
+    // var card_img = "public/brown/"+card;
+    // $('#PLAYER_BOX').append('<img>');
+    // $('#PLAYER_BOX img').attr('src', card_img);
   });
-  socket.on('set_nick', function (pl) {
+  socket.on('set_info', function (pl) {
     pl.forEach((item, i) => {
       if (item.id == socket.id) {
         $('#player_name').text(item.name);
@@ -153,13 +154,29 @@
     });
   });
   function Send_nick(nick) {
-    socket.emit('Send_nick_',nick);
+    socket.emit('Send_info',nick);
     console.log(nick);
   }
   function GetDoor() {
     socket.emit('get_door')
   }
 
+  function UpLVL() {
+    socket.emit('up_lvl')
+  }
+  function UpDamage() {
+    socket.emit('up_damage')
+  }
+function DownLVL() {
+  socket.emit('down_lvl')
+}
+function DownDamage() {
+  socket.emit('down_damage')
+}
+var cardInHand = [];
+function SetCard() {
+  cardInHand.push("public/brown/"+card);
+}
 
 </script>
 </body>
