@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var play = require('./play');
 //
 app.use(express.urlencoded());
 app.use(express.json());
@@ -31,7 +32,7 @@ app.get('/', function (req, res) {
 app.post("/munchkin", urlencodedParser, function (req, res) {
   if (players.length == 0) {
     if(!req.body) return res.sendStatus(400);
-    res.sendFile(__dirname + '/munchkin.html');
+    res.sendFile(__dirname + '/munch-front.html');
   }
     else {
       console.log("Комната занята");
@@ -40,7 +41,7 @@ app.post("/munchkin", urlencodedParser, function (req, res) {
 app.post("/munchkin_start", urlencodedParser, function (req, res) {
   if (req.body.pris == password) {
     if(!req.body) return res.sendStatus(400);
-    res.sendFile(__dirname + '/munchkin.html');
+    res.sendFile(__dirname + '/munch-front.html');
   }
     else {
       console.log("Комната не создана");
@@ -48,26 +49,26 @@ app.post("/munchkin_start", urlencodedParser, function (req, res) {
 });
 app.post("/munchkin_set_password", urlencodedParser, function (req, res) {
     password = req.body.pass;
-    res.sendFile(__dirname + '/munchkin.html');
+    res.sendFile(__dirname + '/munch-front.html');
 });
-var players = []
-var password = ""
+var password = "";
 io.on('connection', function(socket) {
-    players.push(socket);
-    console.log("Connected");
+    // const userId = await fetchUserId(socket);
+    play.pushPlayer({type:'player',id : socket.id, level: 1,name:""});
     //
     io.emit('players_in_room',players.length);
-    // io.emit('players_in_room',players.length)
     socket.on('disconnect', function () {
     players.splice(players.indexOf(socket),1);
     console.log("disconnected");
     io.emit('players_in_room',players.length);
-
-    // socket.on('open_room',function (pass) {
-    //   password = pass;
-    // })
-    // socket.on('send_name',function (name) {
-    //   io.emit('set_name',name);
-    // })
+    });
+    socket.on('Send_nick_', function (nick) {
+      play.pushNick(nick,socket.id);
+      io.emit('set_nick', play.getName());
+      play.printPlayer();
+      console.log("Send_nick complite");
+    })
+    socket.on('get_door', function () {
+      io.emit('new_card',play.getDoor())
     });
 });

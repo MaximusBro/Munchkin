@@ -58,7 +58,7 @@
     height: 40px;
     width: 350px;
   	padding: 20px;
- 
+
    }
    .lvl-damage{
     border: 10px solid darkorange;
@@ -85,8 +85,15 @@
 <body>
 <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
 <button class="button-1" >Начать игру</button>
+<form action="/munchkin_set_password" method="post">
+  <input  placeholder="set password" name = pass>
+  <button type="submit" id="open_room">open room</button>
+</form>
 <div>
-  <input type="text" name="" placeholder="Введите ник" value="" id="name"> <button type="submit" name="button" >Задать ник</button>
+  <p>Players - <span id ="players"></span></p>
+  <form  method="post" onsubmit="return false;">
+    <input type="text" name="nick" id="name_" placeholder="Введите ник"> <button type="submit" name="button" onclick="Send_nick($('#name_').val())" >Задать ник</button>
+  </form>
 </div>
 <!--PLAYERSBOX-->
 <div class ="Player tabs">
@@ -100,28 +107,55 @@
     <p><span id="box2">PLAYER TAB</span></p><br>
     </div>
 
-    <div>
-        <p><span id="box1">Name3</span></p>
-        <p><span id="box2">PLAYER TAB</span></p>
-    </div>
 <!--END-->
 
 </div>
 
 <img src="public/gold/Сокровище.png" >
-<img src="public/brown/Дверь.png" class="door">
+<img onclick="GetDoor()" src="public/brown/Дверь.png" class="door">
     <!--MAIN_PLAYER-->
     <div>
         <div id="PLAYER_BOX"></div>
         <div id="PLAYER_BOX2"></div>
     </div>
 
-<div class="name_">Name</div>
-<div class="lvl-damage">LVL</div>
-<div class="lvl-damage">Damage</div>
-<div class="table"></div>
+<div class="name_" id="player_name">Name</div>
+<div class="lvl-damage">LVL - <span id="lvl"></span> </div>
+<div class="lvl-damage">Damage - <span id="damage"></span> </div>
+<div class="table"> <span id="stol" ></span> </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
+<script>
+// $("button").click(function( event ) {
+//   event.preventDefault();
+// });
+// $(function () {
+  var socket = io.connect('/');
+
+  socket.on('players_in_room',function (players) {
+    $('#players').text(players);
+  });
+  socket.on('new_card',function (card) {
+      $('#stol').text(card.type+", "+card.level+", "+card.damage);
+  });
+  socket.on('set_nick', function (pl) {
+    pl.forEach((item, i) => {
+      if (item.id == socket.id) {
+        $('#player_name').text(item.name);
+        $('#lvl').text(item.level);
+        $('#damage').text(item.damage);
+      };
+    });
+  });
+  function Send_nick(nick) {
+    socket.emit('Send_nick_',nick);
+    console.log(nick);
+  }
+  function GetDoor() {
+    socket.emit('get_door')
+  }
 
 
-
+</script>
 </body>
 </html>
