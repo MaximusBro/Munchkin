@@ -22,11 +22,21 @@ module.exports = {
     getInfo: function () {
         return players;
     },
-    getDoor: function () {
-        var card = door[0]
-        door.shift();
-        console.log(card);
-        return card;
+    getDoor: function (id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.cardInHandDoor.push(door[0]);
+          door.shift();
+        }
+      });
+    },
+    getGold: function (id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.cardInHandGold.push(gold[0]);
+          gold.shift();
+        }
+      });
     },
     pushNick: function (nick,id) {
       players.forEach((item, i) => {

@@ -54,7 +54,7 @@ app.post("/munchkin_set_password", urlencodedParser, function (req, res) {
 var password = "";
 io.on('connection', function(socket) {
     // const userId = await fetchUserId(socket);
-    play.pushPlayer({type:'player',id : socket.id, level: 1,name:"",damage: 1});
+    play.pushPlayer({type:'player',id : socket.id, level: 1,name:"",damage: 1,cardInHandDoor:[],cardInHandGold:[],cardInFront:[]});
     //
     io.emit('players_in_room',players.length);
     socket.on('disconnect', function () {
@@ -87,6 +87,11 @@ io.on('connection', function(socket) {
     })
 
     socket.on('get_door', function () {
-      io.emit('new_door_card',play.getDoor())
+      play.getDoor(socket.id)
+      io.emit('set_info', play.getInfo());
+    });
+    socket.on('get_gold', function () {
+      play.getGold(socket.id)
+      io.emit('set_info', play.getInfo());
     });
 });

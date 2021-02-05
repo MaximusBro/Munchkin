@@ -12,23 +12,14 @@
     background-image: url(public/img/фон.jpg);
     background-size: 100%;
    }
-    #box1 {
-    background: #aace28; /* Цвет фона */
-    width: 500px; /* Ширина блока */
-    padding: 10px; /* Поля */
-    border: 2px solid #000; /* Параметры рамки */
-    }
-    #box2 {
-    background: rgb(42, 207, 212); /* Цвет фона */
-    width: 500px; /* Ширина блока */
-    padding: 10px; /* Поля */
-    margin-top: 10px; /* Отступ сверху */
-    border: 2px solid #000; /* Параметры рамки */
-    -moz-box-sizing: border-box; /* Для Firefox */
-    box-sizing: border-box; /* Ширина блока с полями */
-   }
    .d{
      display: inline-block;
+   }
+   #CardInFront{
+     position: absolute;
+     right:  10px;
+     top: 410px;
+     border: 2px solid red;
    }
    #PLAYER_BOX{
      background-size: 100%;
@@ -98,14 +89,64 @@
 </div>
 <!--PLAYERSBOX-->
 <div class ="Player tabs">
-    <div>
-        <p><span id="box1"><span id="name1">Name1</span></span></p>
-        <p><span id="box2">PLAYER TAB</span></p><br>
+    <div class="0__" class="n1">
+        <p><span ><span id="name0" class="n1"></span></span><br>
+        <span ><span id="lvl0" class="n1"></span></span><br>
+        <span ><span id="damage0" class="n1"></span></span></p>
+        <p><span >
+          <div class="card">
+            <div class="d" class="0_" align="left"></div>
+            <div class="d" class="1_" align="left"></div>
+            <div class="d" class="2_" align="left"></div>
+            <div class="d" class="3_" align="left"></div>
+            <div class="d" class="4_" align="left"></div>
+            <div class="d" class="5_" align="left"></div>
+            <div class="d" class="6_" align="left"></div>
+            <div class="d" class="7_" align="left"></div>
+            <div class="d" class="8_" align="left"></div>
+            <div class="d" class="9_" align="left"></div>
+          </div>
+        </span></p><br>
     </div>
 
-    <div>
-    <p><span id="box1">Name2</span></p>
-    <p><span id="box2">PLAYER TAB</span></p><br>
+    <div class="1__" class="n1">
+        <p><span ><span id="name1" class="n1"></span></span><br>
+        <span ><span id="lvl1" class="n1"></span></span><br>
+        <span ><span id="damage1" class="n1"></span></span></p>
+        <p><span >
+          <div class="card">
+            <div class="d" class="0_" align="left"></div>
+            <div class="d" class="1_" align="left"></div>
+            <div class="d" class="2_" align="left"></div>
+            <div class="d" class="3_" align="left"></div>
+            <div class="d" class="4_" align="left"></div>
+            <div class="d" class="5_" align="left"></div>
+            <div class="d" class="6_" align="left"></div>
+            <div class="d" class="7_" align="left"></div>
+            <div class="d" class="8_" align="left"></div>
+            <div class="d" class="9_" align="left"></div>
+          </div>
+        </span></p><br>
+    </div>
+
+    <div class="2__" class="n1">
+        <p><span ><span id="name2" class="n1"></span></span><br>
+        <span ><span id="lvl2" class="n1"></span></span><br>
+        <span ><span id="damage2" class="n1"></span></span></p>
+        <span >
+          <div class="card">
+            <div class="d" class="0_" align="left"></div>
+            <div class="d" class="1_" align="left"></div>
+            <div class="d" class="2_" align="left"></div>
+            <div class="d" class="3_" align="left"></div>
+            <div class="d" class="4_" align="left"></div>
+            <div class="d" class="5_" align="left"></div>
+            <div class="d" class="6_" align="left"></div>
+            <div class="d" class="7_" align="left"></div>
+            <div class="d" class="8_" align="left"></div>
+            <div class="d" class="9_" align="left"></div>
+          </div>
+        </span></p><br>
     </div>
 
 <!--END-->
@@ -116,6 +157,9 @@
   <img  onclick="GetDoor()" src="public/brown/Дверь.png" class="door">
 </div>
     <!--MAIN_PLAYER-->
+    <div id="CardInFront" align="right">
+
+    </div>
     <div align="left">
         <div id="PLAYER_BOX" align="left">
           <div class="d" id="0" align="left"></div>
@@ -129,15 +173,26 @@
           <div class="d" id="8" align="left"></div>
           <div class="d" id="9" align="left"></div>
         </div>
-        <div id="PLAYER_BOX2"></div>
+        <div id="PLAYER_BOX2">
+          <div class="d" id="0" align="left"></div>
+          <div class="d" id="1" align="left"></div>
+          <div class="d" id="2" align="left"></div>
+          <div class="d" id="3" align="left"></div>
+          <div class="d" id="4" align="left"></div>
+          <div class="d" id="5" align="left"></div>
+          <div class="d" id="6" align="left"></div>
+          <div class="d" id="7" align="left"></div>
+          <div class="d" id="8" align="left"></div>
+          <div class="d" id="9" align="left"></div>
+        </div>
     </div>
 <div class="name_">
-  <div class="n1" id="player_name" color="red">Name</div>
-  <div class="n1">LVL : <span id="lvl"></span>
+  <div class="n1" id="player_name"></div>
+  <div class="n1"><span id="lvl"></span>
     <button type="submit" onclick="UpLVL()">+1</button>
     <button type="submit" onclick="DownLVL()">-1</button>
   </div>
-  <div class="n1">Damage : <span id="damage"></span>
+  <div class="n1"><span id="damage"></span>
     <button type="submit" onclick="UpDamage()">+1</button>
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
@@ -151,35 +206,67 @@
   socket.on('players_in_room',function (players) {
     $('#players').text(players);
   });
-  socket.on('new_door_card',function (card) {
-    $('#PLAYER_BOX img').remove();
-    SetCard(card).forEach((item, i) => {
-      var divID = '#'+i;
-      $(divID).append('<img>');
-      divID +=' img';
-      $(divID).attr('src', item);
-      console.log(item);
-    });
-
-    // var card_img = "public/brown/"+card;
-    // $('#PLAYER_BOX').append('<img>');
-    // $('#PLAYER_BOX img').attr('src', card_img);
-  });
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   socket.on('set_info', function (pl) {
     pl.forEach((item, i) => {
       if (item.id == socket.id) {
         $('#player_name').text(item.name);
-        $('#lvl').text(item.level);
-        $('#damage').text(item.damage);
-      };
+        $('#lvl').text("LVL : "+item.level);
+        $('#damage').text("Damage : "+item.damage);
+        $('#PLAYER_BOX img').remove();
+        if (item.cardInHandDoor.length > 0) {
+          item.cardInHandDoor.forEach((item, i) => {
+            var divID = '#PLAYER_BOX  #'+i;
+            $(divID).append('<img onclick=CardInFront($(this).attr("src"))>');
+            divID +=' img'
+            item = "public/brown/"+item;
+            $(divID).attr('src', item);
+          });
+        }
+        $('#PLAYER_BOX2 img').remove();
+        if (item.cardInHandGold.length > 0) {
+          item.cardInHandGold.forEach((item, i) => {
+            var divID = '#PLAYER_BOX2 #'+i;
+            $(divID).append('<img onclick=CardInFront($(this).attr("src"))>');
+            divID +=' img'
+            item = "public/gold/"+item;
+            $(divID).attr('src', item);
+          });
+        }
+      }
+      else {
+        var name = '#name'+(i);
+        $(name).text(item.name);
+        var lvl = '#lvl'+(i);
+        $(lvl).text("LVL : "+item.level);
+        var damage = '#damage'+(i);
+        $(damage).text("Damage : "+item.damage);
+        // if (item.cardInHand.length > 0) {
+        //   var hand = ".card img"
+        //   $(hand).remove();
+        //   console.log(item.cardInHand);
+        //   item.cardInHand.forEach((item, a) => {
+        //     hand = ' .card '+(a+"_");
+        //     $(hand).append('<img>');
+        //     hand +=' img'
+        //     item = "public/brown/"+item;
+        //     $(hand).attr('src', item);
+        //     console.log(item);
+        //   });
+        // }
+      }
     });
   });
+  /////////////////////////////////////////////////////////////////
   function Send_nick(nick) {
     socket.emit('Send_info',nick);
     console.log(nick);
   }
   function GetDoor() {
     socket.emit('get_door')
+  }
+  function GetGold() {
+    socket.emit('get_gold')
   }
 
   function UpLVL() {
@@ -194,10 +281,10 @@ function DownLVL() {
 function DownDamage() {
   socket.emit('down_damage')
 }
-var cardInHand = [];
-function SetCard(card) {
-  cardInHand.push("public/brown/"+card);
-  return cardInHand;
+function CardInFront(s) {
+  var a = "<img src='"+s+"' onclick='$(this).remove()'>"
+  console.log(a);
+  $('#CardInFront').append(a);
 }
 
 </script>
