@@ -63,6 +63,10 @@ function Send_nick(nick) {
   console.log(nick);
 }
 
+function StartGame() {
+  socket.emit('start_game')
+}
+
 function GetDoor() {
   socket.emit('get_door')
 }

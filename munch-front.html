@@ -34,10 +34,8 @@
   	display: inline-block;
    }
 
-   .door{
-   	margin-left: auto;
-   }
    #rub{
+     margin-left: auto;
    	position: absolute;
     right: 550px;
     top: 80px;
@@ -76,7 +74,7 @@
 </head>
 <body>
 <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
-<button class="button-1" >Начать игру</button>
+<button class="button-1" onclick="StartGame()">Начать игру</button>
 <form action="/munchkin_set_password" method="post">
   <input  placeholder="set password" name = pass>
   <button type="submit" id="open_room">open room</button>
@@ -153,8 +151,8 @@
 
 </div>
 <div id="rub">
+  <img  onclick="GetDoor()" src="public/brown/Дверь.png" >
   <img  onclick="GetGold()" src="public/gold/Сокровище.png" >
-  <img  onclick="GetDoor()" src="public/brown/Дверь.png" class="door">
 </div>
     <!--MAIN_PLAYER-->
     <div id="CardInFront" align="right">

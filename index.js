@@ -64,11 +64,25 @@ app.post("/munchkin_set_password", urlencodedParser, function (req, res) {
 //Комунікація сервера з клієнтом!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 io.on('connection', function(socket) {
     //створення об*єкту гравець
-    play.pushPlayer({type:'player',id:socket.id, level: 1, name:"Player", damage: 1, cardInHandDoor:[], cardInHandGold:[], cardInFront:[]});
+    play.pushPlayer({
+      type:'player',
+      id:socket.id,
+      level: 1,
+      name:"Player",
+      damage: 1,
+      cardInHandDoor:[],
+      cardInHandGold:[],
+      cardInFront:[]
+    });
     io.emit('players_in_room',play.numPlayers());
 
     socket.on('Send_info', function (nick) {
       play.pushNick(nick,socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+
+    socket.on('start_game', function () {
+      play.startGame();
       io.emit('set_info', play.getInfo());
     })
 

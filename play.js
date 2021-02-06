@@ -31,6 +31,18 @@ module.exports = {
         return players;
     },
 
+    startGame: function () {
+      for (var i = 0; i < 4; i++) {
+        players.forEach((item, a) => {
+          item.cardInHandDoor.push(door[0]);
+          door.shift();
+          item.cardInHandGold.push(gold[0]);
+          gold.shift();
+        });
+
+      }
+    },
+
     getDoor: function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
