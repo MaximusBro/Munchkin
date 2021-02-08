@@ -1,6 +1,7 @@
 var door = [];
 var gold = [];
 players = [];
+var start = false;
 for (var i = 1; i <= 73; i++) {
   door.push(i + ".png")
 }
@@ -32,15 +33,15 @@ module.exports = {
     },
 
     startGame: function () {
-      for (var i = 0; i < 4; i++) {
-        players.forEach((item, a) => {
+      players.forEach((item, a) => {
+        for (var i = 0; i < 4; i++) {
           item.cardInHandDoor.push(door[0]);
           door.shift();
           item.cardInHandGold.push(gold[0]);
           gold.shift();
-        });
-
-      }
+        };
+        item.start = true;
+      })
     },
 
     getDoor: function (id) {
@@ -57,6 +58,14 @@ module.exports = {
         if (id == item.id) {
           item.cardInHandGold.push(gold[0]);
           gold.shift();
+        }
+      })
+    },
+
+    cardInFront: function (src_, id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.cardInFront.push(src_);
         }
       })
     },

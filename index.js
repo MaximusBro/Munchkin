@@ -28,8 +28,15 @@ app.get('/', function (req, res) {
 //Перехід на главну
 //////////////////////////////////////////////////////////////////////////////
 //Створення кімнати(при натисненні відповідної кнопки відсилаєтьця пост-запрос)
+var password = "";
+pass = [1,2,3,4,5]
 app.post("/munchkin", urlencodedParser, function (req, res) {
   if (players.length == 0) {
+    password = "";
+    shuffle(pass);
+    password += pass[0];
+    password += pass[1];
+    password += pass[2];
     if(!req.body) return res.sendStatus(400);
     res.sendFile(__dirname + '/munch-front.html');
   }
@@ -40,7 +47,6 @@ app.post("/munchkin", urlencodedParser, function (req, res) {
 //Створення кімнати
 //////////////////////////////////////////////////////////////////////////////
 //Віхд в кімнату(за паролем(ПАролем може бути навіть пуста строчка))
-var password = "secret_pass";
 app.post("/munchkin_start", urlencodedParser, function (req, res) {
   if (req.body.pris == password) {
     if(!req.body) return res.sendStatus(400);
@@ -72,9 +78,10 @@ io.on('connection', function(socket) {
       damage: 1,
       cardInHandDoor:[],
       cardInHandGold:[],
-      cardInFront:[]
+      cardInFront:[],
+      start: false
     });
-    io.emit('players_in_room',play.numPlayers());
+    io.emit('players_in_room',play.numPlayers(),password);
 
     socket.on('Send_info', function (nick) {
       play.pushNick(nick,socket.id);
@@ -116,12 +123,20 @@ io.on('connection', function(socket) {
       io.emit('set_info', play.getInfo());
     })
 
+    socket.on('card_in_front',function (src_) {
+      play.cardInFront(src_ ,socket.id);
+      io.emit('set_info', play.getInfo());
+    });
+
     socket.on('disconnect', function () {
     play.removePlayer(socket.id);
     console.log(socket.id+" disconnected");
-    io.emit('players_in_room',play.numPlayers());
+    io.emit('players_in_room',play.numPlayers(),password);
     });
 });
 //Комунікація сервера з клієнтом!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //Відслідковуєм підключення,створюєм гравця
 //////////////////////////////////////////////////////////////////////////////
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}

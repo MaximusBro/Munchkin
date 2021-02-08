@@ -1,12 +1,14 @@
 var socket = io.connect('/');
 
-socket.on('players_in_room',function (players) {
+socket.on('players_in_room',function (players,pass) {
   $('#players').text(players);
+  $('#pass').text(pass)
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////
-socket.on('set_info', function (pl) {
+socket.on('set_info', function (pl,start) {
   var index = 0;
   pl.forEach((item, i) => {
+    if(item.start){$('.start').remove()};
     if (item.id == socket.id) {
       $('#player_name').text(item.name);
       $('#lvl').text("LVL : "+item.level);
@@ -32,6 +34,16 @@ socket.on('set_info', function (pl) {
           $(divID).attr('src', item);
         });
       }
+      if (item.cardInFront.length > 0) {
+          $('#CardInFront img').remove();
+          item.cardInFront.forEach((item, i) => {
+          var divID = '#CardInFront #'+i;
+          $(divID).append('<img src=item>');
+          divID +=' img'
+          $(divID).attr('src', item);
+          console.log(item);
+        });
+      }
     }
     else {
       var name = '#name'+(index);
@@ -40,19 +52,16 @@ socket.on('set_info', function (pl) {
       $(lvl).text("LVL : "+item.level);
       var damage = '#damage'+(index);
       $(damage).text("Damage : "+item.damage);
-      // if (item.cardInHand.length > 0) {
-      //   var hand = ".card img"
-      //   $(hand).remove();
-      //   console.log(item.cardInHand);
-      //   item.cardInHand.forEach((item, a) => {
-      //     hand = ' .card '+(a+"_");
-      //     $(hand).append('<img>');
-      //     hand +=' img'
-      //     item = "public/brown/"+item;
-      //     $(hand).attr('src', item);
-      //     console.log(item);
-      //   });
-      // }
+      if (item.cardInFront.length > 0) {
+        var card = ".card"+index;
+        $(card+" img").remove();
+        item.cardInFront.forEach((item, a) => {
+          var divID = card;
+          $(divID).append('<img>');
+          card +=' img'
+          $(divID).attr('src', item);
+        });
+      }
       index++;
     }
   });
@@ -91,8 +100,10 @@ function DownDamage() {
 socket.emit('down_damage')
 }
 
-function CardInFront(s) {
-var a = "<img src='"+s+"' onclick='$(this).remove()'>"
-console.log(a);
-$('#CardInFront').append(a);
+function CardInFront(src_) {
+  socket.emit('card_in_front',src_);
+  ///////////////////////
+// var a = "<img src='"+s+"' onclick='$(this).remove()'>"
+// console.log(a);
+// $('#CardInFront').append(a);
 }
