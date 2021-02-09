@@ -129,6 +129,10 @@ io.on('connection', function(socket) {
       play.printPlayer();
     });
 
+    socket.on('kub', function () {
+      io.emit('set_kub',play.getKub());
+    })
+
     socket.on('disconnect', function () {
     play.removePlayer(socket.id);
     console.log(socket.id+" disconnected");

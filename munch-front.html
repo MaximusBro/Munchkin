@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Munchkin</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="./drag.js"></script>
+    <!-- <script language="JavaScript" type="text/javascript" src="./drag.js"></script> -->
 <style>
     body {
     /* overflow: hidden; */
     background-image: url(public/img/фон.jpg);
     background-size: 100%;
    }
-   .drag { 
-   	position:relative; cursor:hand; z-index: 100; 
+   .drag {
+   	position:relative; cursor:hand; z-index: 100;
    }
    .d{
      display: inline-block;
@@ -217,6 +217,7 @@
     <button type="submit" onclick="UpDamage()">+1</button>
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
+  <div class="n1">На кубике : <span id="kub"></span> <button onclick="Kub()" >Бросить кубик!</button> </div>
 </div>
 <!-- <div class="table"> <span id="stol" ></span> </div> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
