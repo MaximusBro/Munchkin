@@ -6,31 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Munchkin</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- <script language="JavaScript" type="text/javascript" src="./drag.js"></script> -->
 <style>
     body {
-    overflow: hidden;
+    /* overflow: hidden; */
     background-image: url(public/img/фон.jpg);
     background-size: 100%;
+   }
+   .drag {
+   	position:relative; cursor:hand; z-index: 100;
    }
    .d{
      display: inline-block;
    }
+   #card0 .d img{
+     width: 100px;
+   }
+   #card1 .d img{
+     width: 100px;
+   }
+   #card2 .d img{
+     width: 100px;
+   }
    #CardInFront{
      position: absolute;
      right:  10px;
-     top: 410px;
-     border: 2px solid red;
+     top: 240px;
+     /* border: 2px solid red; */
    }
    #PLAYER_BOX{
      background-size: 100%;
-     float: left;
-     border: 15px solid darkorange;
+     /*float: left; */
+     /* border: 15px solid darkorange; */
   	/* padding: 150px; */
   	 display: inline-block;
    }
    #PLAYER_BOX2{
-     float: left;
-    border: 15px solid darkorange;
+    /* float: left; */
+    /* border: 15px solid darkorange; */
   	display: inline-block;
    }
 
@@ -41,17 +54,20 @@
     top: 80px;
 
    }
+   #rub img{
+     width: 100px;
+   }
    .name_{
      position: absolute;
      right: 5px;
-     bottom: 5px;
+     top: 5px;
    }
    .n1{
      color: red;
      font-size: 22px;
      border: 4px solid black;
    }
-   .table{
+   /* .table{
      position: absolute;
      right: 1%;
      top: 1%;
@@ -63,7 +79,7 @@
    	width: 200px;
    	/* margin-left: 60%;
    	margin-top: -40%; */
-   }
+   /*}*/
    #stol{
      position:absolute;
      left:30px;
@@ -74,13 +90,11 @@
 </head>
 <body>
 <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
+<p>Players - <span id ="players"></span></p>
+<div class="start">
 <button class="button-1" onclick="StartGame()">Начать игру</button>
-<form action="/munchkin_set_password" method="post">
-  <input  placeholder="set password" name = pass>
-  <button type="submit" id="open_room">open room</button>
-</form>
-<div>
-  <p>Players - <span id ="players"></span></p>
+<div>Passwor : <span id="pass"></span> </div>
+
   <form  method="post" onsubmit="return false;">
     <input type="text" name="nick" id="name_" placeholder="Введите ник"> <button type="submit" name="button" onclick="Send_nick($('#name_').val())" >Задать ник</button>
   </form>
@@ -92,17 +106,17 @@
         <span ><span id="lvl0" class="n1"></span></span><br>
         <span ><span id="damage0" class="n1"></span></span></p>
         <p><span >
-          <div class="card">
-            <div class="d" class="0_" align="left"></div>
-            <div class="d" class="1_" align="left"></div>
-            <div class="d" class="2_" align="left"></div>
-            <div class="d" class="3_" align="left"></div>
-            <div class="d" class="4_" align="left"></div>
-            <div class="d" class="5_" align="left"></div>
-            <div class="d" class="6_" align="left"></div>
-            <div class="d" class="7_" align="left"></div>
-            <div class="d" class="8_" align="left"></div>
-            <div class="d" class="9_" align="left"></div>
+          <div id="card0">
+            <div class="d" id="0" align="left"></div>
+            <div class="d" id="1" align="left"></div>
+            <div class="d" id="2" align="left"></div>
+            <div class="d" id="3" align="left"></div>
+            <div class="d" id="4" align="left"></div>
+            <div class="d" id="5" align="left"></div>
+            <div class="d" id="6" align="left"></div>
+            <div class="d" id="7" align="left"></div>
+            <div class="d" id="8" align="left"></div>
+            <div class="d" id="9" align="left"></div>
           </div>
         </span></p><br>
     </div>
@@ -112,17 +126,17 @@
         <span ><span id="lvl1" class="n1"></span></span><br>
         <span ><span id="damage1" class="n1"></span></span></p>
         <p><span >
-          <div class="card">
-            <div class="d" class="0_" align="left"></div>
-            <div class="d" class="1_" align="left"></div>
-            <div class="d" class="2_" align="left"></div>
-            <div class="d" class="3_" align="left"></div>
-            <div class="d" class="4_" align="left"></div>
-            <div class="d" class="5_" align="left"></div>
-            <div class="d" class="6_" align="left"></div>
-            <div class="d" class="7_" align="left"></div>
-            <div class="d" class="8_" align="left"></div>
-            <div class="d" class="9_" align="left"></div>
+          <div id="card1">
+            <div class="d" id="0" align="left"></div>
+            <div class="d" id="1" align="left"></div>
+            <div class="d" id="2" align="left"></div>
+            <div class="d" id="3" align="left"></div>
+            <div class="d" id="4" align="left"></div>
+            <div class="d" id="5" align="left"></div>
+            <div class="d" id="6" align="left"></div>
+            <div class="d" id="7" align="left"></div>
+            <div class="d" id="8" align="left"></div>
+            <div class="d" id="9" align="left"></div>
           </div>
         </span></p><br>
     </div>
@@ -132,17 +146,17 @@
         <span ><span id="lvl2" class="n1"></span></span><br>
         <span ><span id="damage2" class="n1"></span></span></p>
         <span >
-          <div class="card">
-            <div class="d" class="0_" align="left"></div>
-            <div class="d" class="1_" align="left"></div>
-            <div class="d" class="2_" align="left"></div>
-            <div class="d" class="3_" align="left"></div>
-            <div class="d" class="4_" align="left"></div>
-            <div class="d" class="5_" align="left"></div>
-            <div class="d" class="6_" align="left"></div>
-            <div class="d" class="7_" align="left"></div>
-            <div class="d" class="8_" align="left"></div>
-            <div class="d" class="9_" align="left"></div>
+          <div id="card2">
+            <div class="d" id="0" align="left"></div>
+            <div class="d" id="1" align="left"></div>
+            <div class="d" id="2" align="left"></div>
+            <div class="d" id="3" align="left"></div>
+            <div class="d" id="4" align="left"></div>
+            <div class="d" id="5" align="left"></div>
+            <div class="d" id="6" align="left"></div>
+            <div class="d" id="7" align="left"></div>
+            <div class="d" id="8" align="left"></div>
+            <div class="d" id="9" align="left"></div>
           </div>
         </span></p><br>
     </div>
@@ -156,7 +170,16 @@
 </div>
     <!--MAIN_PLAYER-->
     <div id="CardInFront" align="right">
-
+      <div class="d" id="0" align="right"></div>
+      <div class="d" id="1" align="right"></div>
+      <div class="d" id="2" align="right"></div>
+      <div class="d" id="3" align="right"></div>
+      <div class="d" id="4" align="right"></div>
+      <div class="d" id="5" align="right"></div>
+      <div class="d" id="6" align="right"></div>
+      <div class="d" id="7" align="right"></div>
+      <div class="d" id="8" align="right"></div>
+      <div class="d" id="9" align="right"></div>
     </div>
     <div align="left">
         <div id="PLAYER_BOX" align="left">
@@ -194,8 +217,9 @@
     <button type="submit" onclick="UpDamage()">+1</button>
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
+  <div class="n1">На кубике : <span id="kub"></span> <button onclick="Kub()" >Бросить кубик!</button> </div>
 </div>
-<div class="table"> <span id="stol" ></span> </div>
+<!-- <div class="table"> <span id="stol" ></span> </div> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
 <script type="text/javascript" src="public/script-for-game.js"></script>
