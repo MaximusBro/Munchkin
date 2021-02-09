@@ -53,12 +53,12 @@ socket.on('set_info', function (pl,start) {
       var damage = '#damage'+(index);
       $(damage).text("Damage : "+item.damage);
       if (item.cardInFront.length > 0) {
-        var card = ".card"+index;
-        $(card+" img").remove();
+        var card = "#card"+index+" img";
+        $(card).remove();
         item.cardInFront.forEach((item, a) => {
-          var divID = card;
+          var divID = "#card"+index+" #"+a;
           $(divID).append('<img>');
-          card +=' img'
+          divID +=' img'
           $(divID).attr('src', item);
         });
       }

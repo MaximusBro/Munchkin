@@ -126,6 +126,7 @@ io.on('connection', function(socket) {
     socket.on('card_in_front',function (src_) {
       play.cardInFront(src_ ,socket.id);
       io.emit('set_info', play.getInfo());
+      play.printPlayer();
     });
 
     socket.on('disconnect', function () {
