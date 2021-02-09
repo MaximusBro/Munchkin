@@ -4,8 +4,12 @@ socket.on('players_in_room',function (players,pass) {
   $('#players').text(players);
   $('#pass').text(pass)
 });
+
+socket.on('set_kub',function (num) {
+    $('#kub').text(num);
+})
 ////////////////////////////////////////////////////////////////////////////////////////////////
-socket.on('set_info', function (pl,start) {
+socket.on('set_info', function (pl) {
   var index = 0;
   pl.forEach((item, i) => {
     if(item.start){$('.start').remove()};
@@ -102,8 +106,8 @@ socket.emit('down_damage')
 
 function CardInFront(src_) {
   socket.emit('card_in_front',src_);
-  ///////////////////////
-// var a = "<img src='"+s+"' onclick='$(this).remove()'>"
-// console.log(a);
-// $('#CardInFront').append(a);
+  }
+
+function Kub() {
+  socket.emit('kub');
 }

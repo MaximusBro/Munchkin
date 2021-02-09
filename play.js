@@ -1,6 +1,7 @@
 var door = [];
 var gold = [];
 players = [];
+var kub = [1,2,3,4,5,6]
 var start = false;
 for (var i = 1; i <= 73; i++) {
   door.push(i + ".png")
@@ -66,6 +67,14 @@ module.exports = {
       players.forEach((item, i) => {
         if (id == item.id) {
           item.cardInFront.push(src_);
+          if (src_.slice(0,12)=="public/gold/") {
+            var i = item.cardInHandGold.indexOf(src_.replace("public/gold/",""));
+            item.cardInHandGold.splice(i,1)
+          }
+          else if(src_.slice(0,13)=="public/brown/"){
+            var i = item.cardInHandDoor.indexOf(src_.replace("public/brown/",""));
+            item.cardInHandDoor.splice(i,1)
+          }
         }
       })
     },
@@ -109,6 +118,11 @@ module.exports = {
           item.damage -= 1;
         }
       })
+    },
+
+    getKub:function functionName() {
+      shuffle(kub);
+      return kub[0];
     },
 
     printPlayer: function () {
