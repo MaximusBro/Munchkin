@@ -85,21 +85,36 @@
      left:30px;
      bottom: 1%
    }
-
+   .block{
+    position:absolute;
+    left:0;
+    top: 0px;
+    right:0;
+    background:rgba(255,255,255, 0.4);
+    display:none;
+}
+.holder{
+ position:relative;   
+}
+.holder:hover .block{
+    display:block;
+}
 </style>
 </head>
 <body>
+<!-- Левый угол(настройки игры) -->
 <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
 <p>Players - <span id ="players"></span></p>
 <div class="start">
 <button class="button-1" onclick="StartGame()">Начать игру</button>
 <div>Passwor : <span id="pass"></span> </div>
-
+<!-- END -->
   <form  method="post" onsubmit="return false;">
     <input type="text" name="nick" id="name_" placeholder="Введите ник"> <button type="submit" name="button" onclick="Send_nick($('#name_').val())" >Задать ник</button>
   </form>
 </div>
 <!--PLAYERSBOX-->
+  <!-- Игрок 1 -->
 <div class ="Player tabs">
     <div class="0__" class="n1">
         <p><span ><span id="name0" class="n1"></span></span><br>
@@ -120,7 +135,7 @@
           </div>
         </span></p><br>
     </div>
-
+  <!-- ИГРОК 2 -->
     <div class="1__" class="n1">
         <p><span ><span id="name1" class="n1"></span></span><br>
         <span ><span id="lvl1" class="n1"></span></span><br>
@@ -140,7 +155,7 @@
           </div>
         </span></p><br>
     </div>
-
+  <!-- Игрок 3 -->
     <div class="2__" class="n1">
         <p><span ><span id="name2" class="n1"></span></span><br>
         <span ><span id="lvl2" class="n1"></span></span><br>
@@ -164,11 +179,30 @@
 <!--END-->
 
 </div>
+<!-- Колода -->
 <div id="rub">
+  <div class="holder">
+    <!-- Взять карту двери -->
   <img  onclick="GetDoor()" src="public/brown/Дверь.png" >
+  <div class='block'>
+    <button>взять карту</button>      
+    <!-- Наведение на картинку -->
+  </div>
+
+  </div>
+
+  <div class="holder">
+    <!-- Взять карту сокровищ -->
   <img  onclick="GetGold()" src="public/gold/Сокровище.png" >
+  <div class='block'>
+   <button>Взять карту</button>
+  </div>
 </div>
-    <!--MAIN_PLAYER-->
+</div>
+<!-- END -->
+
+<!--MAIN_PLAYER-->
+    <!-- Карты перед собой -->
     <div id="CardInFront" align="right">
       <div class="d" id="0" align="right"></div>
       <div class="d" id="1" align="right"></div>
@@ -182,6 +216,7 @@
       <div class="d" id="9" align="right"></div>
     </div>
     <div align="left">
+      <!-- Карты в руке(дверь) -->
         <div id="PLAYER_BOX" align="left">
           <div class="d" id="0" align="left"></div>
           <div class="d" id="1" align="left"></div>
@@ -194,6 +229,7 @@
           <div class="d" id="8" align="left"></div>
           <div class="d" id="9" align="left"></div>
         </div>
+        <!-- Карты в руке(золото) -->
         <div id="PLAYER_BOX2">
           <div class="d" id="0" align="left"></div>
           <div class="d" id="1" align="left"></div>
@@ -207,18 +243,25 @@
           <div class="d" id="9" align="left"></div>
         </div>
     </div>
+<!-- END -->
+    <!-- Статы игрока(правый верхний угол) -->
 <div class="name_">
   <div class="n1" id="player_name"></div>
   <div class="n1"><span id="lvl"></span>
+    <!-- Уровень игрока -->
     <button type="submit" onclick="UpLVL()">+1</button>
     <button type="submit" onclick="DownLVL()">-1</button>
   </div>
   <div class="n1"><span id="damage"></span>
+    <!-- Дамаг/урон игрока -->
     <button type="submit" onclick="UpDamage()">+1</button>
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
+  <!-- Кубик(рандомное число) -->
   <div class="n1">На кубике : <span id="kub"></span> <button onclick="Kub()" >Бросить кубик!</button> </div>
 </div>
+<!-- END -->
+
 <!-- <div class="table"> <span id="stol" ></span> </div> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
