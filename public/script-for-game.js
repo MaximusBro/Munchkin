@@ -21,17 +21,28 @@ socket.on('send_kik_gold',function (kik) {
 socket.on('set_kub',function (num) {
     $('#kub').text(num);
 })
+socket.on('del_del_',function functionName() {
+  $('.delCard img').remove();
+})
+socket.on('set_del_',function (arr) {
+  $('.delCard img').remove();
+  arr.forEach((item, i) => {
+    var img = "<div class='holder'><img onclick=DelToHand($(this).attr('src')) src='"+item+"'>"
+    $('.delCard').append(img);
+  });
+  console.log(arr);
+})
 ////////////////////////////////////////////////////////////////////////////////////////////////
 socket.on('set_info', function (pl) {
   var index = 0;
   pl.forEach((item, i) => {
-    if(item.start){$('.start').remove()};
     if (item.id == socket.id) {
       $('#player_name').text(item.name);
       $('#lvl').text("LVL : "+item.level);
       $('#damage').text("Damage : "+item.damage);
+      $('#PLAYER_BOX img').remove();
       if (item.cardInHandDoor.length > 0) {
-        $('#PLAYER_BOX img').remove();
+
         item.cardInHandDoor.forEach((item, i) => {
           var divID = '#PLAYER_BOX ';
           var img = "<div class='holder'><img onclick=CardInFront($(this).attr('src')) src='public/brown/"+item+"'><div class='block'><button onclick=DoorToFigth("+"'"+item+"'"+")>На стол!</button>></div></div>"
@@ -39,33 +50,44 @@ socket.on('set_info', function (pl) {
         });
       }
 /////////////Gold and Door card in hand
+$('#PLAYER_BOX2 img').remove();
       if (item.cardInHandGold.length > 0) {
-        $('#PLAYER_BOX2 img').remove();
+
         item.cardInHandGold.forEach((item, i) => {
           var divID = '#PLAYER_BOX2';
           var img = "<div class='holder'><img onclick=CardInFront($(this).attr('src')) src='public/gold/"+item+"'><div class='block'><button onclick=GoldToFigth("+"'"+item+"'"+")>На стол!</button>></div></div>"
           $(divID).append(img);
         });
       }
+      $('#CardInFront img').remove();
       if (item.cardInFront.length > 0) {
-          $('#CardInFront img').remove();
+
           item.cardInFront.forEach((item, i) => {
             var divID = '#CardInFront';
-            var img = "<img onclick=DeleteCardInFront($(this).attr('src')) src='"+item+"'>"
-            $(divID).append(img);
+            if (item.slice(0,12)=="public/gold/") {
+              var i = item.replace("public/gold/","")
+              var img = "<div class='holder'><img onclick=DeleteCardInFront($(this).attr('src')) src='"+item+"'><div class='block'><button onclick=FrontToGold("+"'"+i+"'"+")>В руку!</button>></div></div>"
+              $(divID).append(img);
+            }
+            else if(item.slice(0,13)=="public/brown/"){
+              var i = item.replace("public/brown/","")
+              var img = "<div class='holder'><img onclick=DeleteCardInFront($(this).attr('src')) src='"+item+"'><div class='block'><button onclick=FrontToDoor("+"'"+i+"'"+")>В руку!</button>></div></div>"
+              $(divID).append(img);
+            }
+
         });
       }
     }
     else {
       var name = '#name'+(index);
-      $(name).text(item.name);
+      $(name).text(item.name+" : "+(item.cardInHandDoor.length+item.cardInHandGold.length));
       var lvl = '#lvl'+(index);
       $(lvl).text("LVL : "+item.level);
       var damage = '#damage'+(index);
       $(damage).text("Damage : "+item.damage);
+      var card = "#card"+index+" img";
+      $(card).remove();
       if (item.cardInFront.length > 0) {
-        var card = "#card"+index+" img";
-        $(card).remove();
         item.cardInFront.forEach((item, a) => {
           var divID = "#card"+index;
           console.log(item);
@@ -75,6 +97,7 @@ socket.on('set_info', function (pl) {
         });
       }
       index++;
+
     }
   });
 });
@@ -139,7 +162,17 @@ function GoldToFigth(src) {
   socket.emit('gold_to_figth',src);
 }
 function DeleteCardInFront(src) {
-  console.log('1');
   socket.emit('delete_card_in_front',src)
-  console.log('2');
+}
+function FrontToDoor(src) {
+  socket.emit('front_to_door',src)
+}
+function FrontToGold(src) {
+  socket.emit('front_to_gold',src)
+}
+function SetDel() {
+  socket.emit('set_del')
+}
+function DelDel() {
+  socket.emit('del_del')
 }

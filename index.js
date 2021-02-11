@@ -83,22 +83,18 @@ io.on('connection', function(socket) {
       start: false
     });
     io.emit('players_in_room',play.numPlayers(),password);
-
     socket.on('Send_info', function (nick) {
       play.pushNick(nick,socket.id);
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('start_game', function () {
       play.startGame();
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('up_lvl',function () {
       play.UpLvl(socket.id);
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('up_damage',function () {
       play.UpDamage(socket.id);
       io.emit('set_info', play.getInfo());
@@ -136,6 +132,12 @@ io.on('connection', function(socket) {
     socket.on('del_gold_figth',function (src) {
       io.emit('send_kik_gold',play.delGoldFigth(src))
     })
+    socket.on('set_del',function () {
+      io.emit('set_del_',play.getDel())
+    })
+    socket.on('del_del',function () {
+      io.emit("del_del_")
+    })
     socket.on('take_door_figth',function(src) {
       play.TakeDoorFigth(src,socket.id);
       io.emit('set_info', play.getInfo());
@@ -146,10 +148,19 @@ io.on('connection', function(socket) {
     })
     socket.on('kub', function () {
       io.emit('set_kub',play.getKub());
+      console.log(play.getDel());
     })
     socket.on('door_to_figth',function (src) {
       play.DoorToFigth(src,socket.id);
       io.emit('send_kik_door',play.getFigthDoor())
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('front_to_door',function (src) {
+      play.FrontToDoor(src,socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('front_to_gold',function (src) {
+      play.FrontToGold(src,socket.id);
       io.emit('set_info', play.getInfo());
     })
     socket.on('gold_to_figth',function (src) {

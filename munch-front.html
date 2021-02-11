@@ -21,14 +21,14 @@
   </form>
 </div>
 <!--PLAYERSBOX-->
-<div class ="playertabs">
-    <div class="0__" class="n1">
+<div class ="playertabs tabs">
+    <div class="0__" id="card0">
         <p><span ><span id="name0" class="n1"></span></span><br>
         <span ><span id="lvl0" class="n1"></span></span><br>
         <span ><span id="damage0" class="n1"></span></span></p>
-        <p><span >
+        <!-- <span >
           <div id="card0"></div>
-        </span></p><br>
+        </span><br> -->
     </div>
 
     <div class="1__" class="n1">
@@ -48,9 +48,6 @@
           <div id="card2"></div>
         </span></p><br>
     </div>
-
-<!--END-->
-
 </div>
 <div id="rub">
   <div class="holder">
@@ -89,27 +86,11 @@
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
   <div class="n1">На кубике : <span id="kub"></span> <button onclick="Kub()" >Бросить кубик!</button> </div>
+</div><br>
+<div class="delCard">
 </div>
-<!-- Колода -->
-<!-- <div id="rub">
-  <div class="holder">
-  <img  onclick="GetDoor()" src="public/brown/Дверь.jpg" >
-  <div class='block'>
-    <button onclick="KikDoor()">Вибить дверь</button>
-  </div>
-
-  </div>
-
-  <div class="holder">
-  <img  onclick="GetGold()" src="public/gold/Сокровище.png" >
-  <div class='block'>
-   <button>Взять в откритую</button>
-  </div>
-</div>
-</div> -->
-<!-- END -->
-
-<!-- <div class="table"> <span id="stol" ></span> </div> -->
+<button onclick="SetDel()">показать отбой</button>
+<button onclick="DelDel()">скрить отбой</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js"></script>
 <script type="text/javascript" src="public/script-for-game.js"></script>
