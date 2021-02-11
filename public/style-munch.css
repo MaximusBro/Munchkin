@@ -3,10 +3,6 @@ body {
     background-image: url(img/fon.jpg);
     background-size: 100%;
    }
-   #card0{
-     height: 220px;
-     scroll-behavior: auto;
-   }
    #card0  img{
      width: 100px;
    }
@@ -14,6 +10,12 @@ body {
      width: 100px;
    }
    #card2  img{
+     width: 100px;
+   }
+   #card3  img{
+     width: 100px;
+   }
+   #card4  img{
      width: 100px;
    }
    #CardInFront{

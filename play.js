@@ -220,6 +220,16 @@ module.exports = {
         console.log(item);
       })
     },
+    DelToFight:function (src,id) {
+          if (src.slice(0,12)=="public/gold/") {
+          del.splice(del.indexOf(src),1)
+          fightgold.push(src.replace("public/gold/",""))
+          }
+          else if(src.slice(0,13)=="public/brown/"){
+            del.splice(del.indexOf(src),1)
+            fightdoor.push(src.replace("public/brown/",""))
+      }
+    },
     getDel:function () {
       return del;
     }

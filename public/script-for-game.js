@@ -27,15 +27,24 @@ socket.on('del_del_',function functionName() {
 socket.on('set_del_',function (arr) {
   $('.delCard img').remove();
   arr.forEach((item, i) => {
-    var img = "<div class='holder'><img onclick=DelToHand($(this).attr('src')) src='"+item+"'>"
+    var img = "<div class='holder'><img onclick=DelToFight($(this).attr('src')) src='"+item+"'>"
     $('.delCard').append(img);
   });
   console.log(arr);
+})
+socket.on('set_bord',function (pl) {
+  for (var i = 0; i < (pl.length-1); i++) {
+    var div = "<div class='"+i+"__' id='card"+i+"'><p><span ><span id='name"+i+"' class='n1'></span></span><br><span ><span id='lvl"+i+"' class='n1'></span></span><br><span ><span id='damage"+i+"' class='n1'></span></span></p></div>"
+    $('.playertabs').append(div);
+  }
 })
 ////////////////////////////////////////////////////////////////////////////////////////////////
 socket.on('set_info', function (pl) {
   var index = 0;
   pl.forEach((item, i) => {
+    if(item.start){
+      $('.start').remove()
+    };
     if (item.id == socket.id) {
       $('#player_name').text(item.name);
       $('#lvl').text("LVL : "+item.level);
@@ -175,4 +184,7 @@ function SetDel() {
 }
 function DelDel() {
   socket.emit('del_del')
+}
+function DelToFight(src) {
+ socket.emit('del_to_fight',src)
 }

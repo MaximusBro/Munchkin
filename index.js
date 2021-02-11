@@ -89,6 +89,7 @@ io.on('connection', function(socket) {
     })
     socket.on('start_game', function () {
       play.startGame();
+      io.emit('set_bord',play.getInfo())
       io.emit('set_info', play.getInfo());
     })
     socket.on('up_lvl',function () {
@@ -134,6 +135,12 @@ io.on('connection', function(socket) {
     })
     socket.on('set_del',function () {
       io.emit('set_del_',play.getDel())
+    })
+    socket.on('del_to_fight',function (src) {
+      play.DelToFight(src,socket.id);
+      io.emit('send_kik_door', play.getFigthDoor());
+      io.emit('send_kik_gold', play.getFigthGold());
+
     })
     socket.on('del_del',function () {
       io.emit("del_del_")
