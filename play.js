@@ -8,6 +8,10 @@ var start = false;
 module.exports = {
     //Експортовані модулі
     setKolod:function () {
+      door = []
+      gold = []
+      fightdoor = []
+      fightgold = []
       for (var i = 1; i <= 73; i++) {
         door.push(i + ".jpg")
       }
@@ -16,8 +20,7 @@ module.exports = {
       }
       shuffle(door);
       shuffle(gold);
-      fightdoor = []
-      fightgold = []
+
     },
     pushPlayer: function (object) {
       players.push(object);
