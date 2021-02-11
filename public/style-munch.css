@@ -3,41 +3,44 @@ body {
     background-image: url(img/fon.jpg);
     background-size: 100%;
    }
-   #card0  img{
+#card0  img{
      width: 100px;
    }
-   #card1  img{
+#card1  img{
      width: 100px;
    }
-   #card2  img{
+#card2  img{
      width: 100px;
    }
-   #card3  img{
+#card3  img{
      width: 100px;
    }
-   #card4  img{
+#card4  img{
      width: 100px;
    }
-   #CardInFront{
+.playertabs{
+     width: 40%;
+   }
+#CardInFront{
      position: relative;
      right:  10px;
      top: 0;
      /* border: 2px solid red; */
    }
-   #PLAYER_BOX{
+#PLAYER_BOX{
      background-size: 100%;
      float: left;
      /* border: 15px solid darkorange; */
   	/* padding: 150px; */
   	 display: inline-block;
    }
-   #PLAYER_BOX2{
+#PLAYER_BOX2{
      float: left;
     /* border: 15px solid darkorange; */
   	display: inline-block;
    }
 
-   #rub{
+#rub{
      display: inline-block;
      margin-left: auto;
    	position: absolute;
@@ -45,64 +48,72 @@ body {
     top: 10px;
 
    }
-   #rub img{
+#rub img{
      width: 100px;
    }
-   .name_{
+.name_{
      position: absolute;
      right: 5px;
      top: 5px;
    }
-   .n1{
+.n1{
      color: #F5302D;
      font-size: 22px;
      border: 4px solid black;
    }
    }
-   #fight{
+.vs{
      position: absolute;
-     display: inline-block;
-     top: 240px;
+     width: 600px;
+     height: 600px;
+     top: 300px;
      right: 5px;
+     border: 4px solid blue;
+}
+#fight{
+     position: absolute;
+     top:2px;
+     right: 420px;
+     width: 35%;
    }
-   #fight img{
-     width: 150px;
+#fight img{
+     width: 110px;
    }
 
-   .holder{
+.holder{
      display: inline-block;
       position:relative;
       }
-    .block{
+.block{
       position:relative;
-      bottom: 200px;
+      bottom: 170px;
       display:none;
       }
-    .holder:hover .block{
+.holder:hover .block{
       display:block;
       }
 
-      #rub .holder{
+#rub .holder{
         display: inline-block;
          position:relative;
          }
-       #rub .block{
+#rub .block{
          position:relative;
          bottom: 160px;
          display:none;
          }
-       #rub .holder:hover .block{
+#rub .holder:hover .block{
          display:block;
          }
-    .delCard{
+.delCard{
       border: 4px double #F5302D;
       display: inline-block;
       position: relative;
       bottom: 2px;
     }
-    .scale {
+.scale {
       transition: 1s; /* Время эффекта */
      }
-     .scale:hover {
+.scale:hover {
       transform: scale(1.2); /* Увеличиваем масштаб */
      }
