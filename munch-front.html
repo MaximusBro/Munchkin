@@ -6,260 +6,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Munchkin</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="public/style-munch.css">
     <!-- <script language="JavaScript" type="text/javascript" src="./drag.js"></script> -->
-<style>
-    body {
-    /* overflow: hidden; */
-    background-image: url(public/img/фон.jpg);
-    background-size: 100%;
-   }
-   .drag {
-   	position:relative; cursor:hand; z-index: 100;
-   }
-   .d{
-     display: inline-block;
-   }
-   #card0 .d img{
-     width: 100px;
-   }
-   #card1 .d img{
-     width: 100px;
-   }
-   #card2 .d img{
-     width: 100px;
-   }
-   #CardInFront{
-     position: absolute;
-     right:  10px;
-     top: 240px;
-     /* border: 2px solid red; */
-   }
-   #PLAYER_BOX{
-     background-size: 100%;
-     /*float: left; */
-     /* border: 15px solid darkorange; */
-  	/* padding: 150px; */
-  	 display: inline-block;
-   }
-   #PLAYER_BOX2{
-    /* float: left; */
-    /* border: 15px solid darkorange; */
-  	display: inline-block;
-   }
-
-   #rub{
-     margin-left: auto;
-   	position: absolute;
-    right: 550px;
-    top: 80px;
-
-   }
-   #rub img{
-     width: 100px;
-   }
-   .name_{
-     position: absolute;
-     right: 5px;
-     top: 5px;
-   }
-   .n1{
-     color: red;
-     font-size: 22px;
-     border: 4px solid black;
-   }
-   /* .table{
-     position: absolute;
-     right: 1%;
-     top: 1%;
-   	background-image: url(public/img/стол.jpg);
-   	background-size: 100%;
-   	border: 10px solid darkorange;
-   	padding: 150px;
-   	height: 80px;
-   	width: 200px;
-   	/* margin-left: 60%;
-   	margin-top: -40%; */
-   /*}*/
-   #stol{
-     position:absolute;
-     left:30px;
-     bottom: 1%
-   }
-   .block{
-    position:absolute;
-    left:0;
-    top: 0px;
-    right:0;
-    background:rgba(255,255,255, 0.4);
-    display:none;
-}
-.holder{
- position:relative;   
-}
-.holder:hover .block{
-    display:block;
-}
-</style>
 </head>
 <body>
-<!-- Левый угол(настройки игры) -->
-<h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1>
+<!-- <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1> -->
 <p>Players - <span id ="players"></span></p>
 <div class="start">
 <button class="button-1" onclick="StartGame()">Начать игру</button>
 <div>Passwor : <span id="pass"></span> </div>
-<!-- END -->
+
   <form  method="post" onsubmit="return false;">
     <input type="text" name="nick" id="name_" placeholder="Введите ник"> <button type="submit" name="button" onclick="Send_nick($('#name_').val())" >Задать ник</button>
   </form>
 </div>
 <!--PLAYERSBOX-->
-  <!-- Игрок 1 -->
-<div class ="Player tabs">
+<div class ="playertabs">
     <div class="0__" class="n1">
         <p><span ><span id="name0" class="n1"></span></span><br>
         <span ><span id="lvl0" class="n1"></span></span><br>
         <span ><span id="damage0" class="n1"></span></span></p>
         <p><span >
-          <div id="card0">
-            <div class="d" id="0" align="left"></div>
-            <div class="d" id="1" align="left"></div>
-            <div class="d" id="2" align="left"></div>
-            <div class="d" id="3" align="left"></div>
-            <div class="d" id="4" align="left"></div>
-            <div class="d" id="5" align="left"></div>
-            <div class="d" id="6" align="left"></div>
-            <div class="d" id="7" align="left"></div>
-            <div class="d" id="8" align="left"></div>
-            <div class="d" id="9" align="left"></div>
-          </div>
+          <div id="card0"></div>
         </span></p><br>
     </div>
-  <!-- ИГРОК 2 -->
+
     <div class="1__" class="n1">
         <p><span ><span id="name1" class="n1"></span></span><br>
         <span ><span id="lvl1" class="n1"></span></span><br>
         <span ><span id="damage1" class="n1"></span></span></p>
         <p><span >
-          <div id="card1">
-            <div class="d" id="0" align="left"></div>
-            <div class="d" id="1" align="left"></div>
-            <div class="d" id="2" align="left"></div>
-            <div class="d" id="3" align="left"></div>
-            <div class="d" id="4" align="left"></div>
-            <div class="d" id="5" align="left"></div>
-            <div class="d" id="6" align="left"></div>
-            <div class="d" id="7" align="left"></div>
-            <div class="d" id="8" align="left"></div>
-            <div class="d" id="9" align="left"></div>
-          </div>
+          <div id="card1"></div>
         </span></p><br>
     </div>
-  <!-- Игрок 3 -->
+
     <div class="2__" class="n1">
         <p><span ><span id="name2" class="n1"></span></span><br>
         <span ><span id="lvl2" class="n1"></span></span><br>
         <span ><span id="damage2" class="n1"></span></span></p>
         <span >
-          <div id="card2">
-            <div class="d" id="0" align="left"></div>
-            <div class="d" id="1" align="left"></div>
-            <div class="d" id="2" align="left"></div>
-            <div class="d" id="3" align="left"></div>
-            <div class="d" id="4" align="left"></div>
-            <div class="d" id="5" align="left"></div>
-            <div class="d" id="6" align="left"></div>
-            <div class="d" id="7" align="left"></div>
-            <div class="d" id="8" align="left"></div>
-            <div class="d" id="9" align="left"></div>
-          </div>
+          <div id="card2"></div>
         </span></p><br>
     </div>
 
 <!--END-->
 
 </div>
-<!-- Колода -->
 <div id="rub">
   <div class="holder">
-    <!-- Взять карту двери -->
-  <img  onclick="GetDoor()" src="public/brown/Дверь.png" >
-  <div class='block'>
-    <button>взять карту</button>      
-    <!-- Наведение на картинку -->
+    <img  onclick="GetDoor()" src="public/brown/Дверь.jpg" >
+    <div class="block">
+        <button onclick="KikDoor()">Вибить дверь</button>
+    </div>
   </div>
-
-  </div>
-
   <div class="holder">
-    <!-- Взять карту сокровищ -->
-  <img  onclick="GetGold()" src="public/gold/Сокровище.png" >
-  <div class='block'>
-   <button>Взять карту</button>
+    <img  onclick="GetGold()" src="public/gold/Сокровище.jpg" >
+    <div class="block">
+        <button onclick="KikGold()">Взять сокровище<br> в откритую</button>
+    </div>
   </div>
 </div>
-</div>
-<!-- END -->
+    <!--MAIN_PLAYER-->
+    <div id="fight" align="right">
+      <div id="door"></div>
+      <div id="gold"></div>
+    </div>
 
-<!--MAIN_PLAYER-->
-    <!-- Карты перед собой -->
-    <div id="CardInFront" align="right">
-      <div class="d" id="0" align="right"></div>
-      <div class="d" id="1" align="right"></div>
-      <div class="d" id="2" align="right"></div>
-      <div class="d" id="3" align="right"></div>
-      <div class="d" id="4" align="right"></div>
-      <div class="d" id="5" align="right"></div>
-      <div class="d" id="6" align="right"></div>
-      <div class="d" id="7" align="right"></div>
-      <div class="d" id="8" align="right"></div>
-      <div class="d" id="9" align="right"></div>
-    </div>
+    <div id="CardInFront" align="right"></div>
+
     <div align="left">
-      <!-- Карты в руке(дверь) -->
-        <div id="PLAYER_BOX" align="left">
-          <div class="d" id="0" align="left"></div>
-          <div class="d" id="1" align="left"></div>
-          <div class="d" id="2" align="left"></div>
-          <div class="d" id="3" align="left"></div>
-          <div class="d" id="4" align="left"></div>
-          <div class="d" id="5" align="left"></div>
-          <div class="d" id="6" align="left"></div>
-          <div class="d" id="7" align="left"></div>
-          <div class="d" id="8" align="left"></div>
-          <div class="d" id="9" align="left"></div>
-        </div>
-        <!-- Карты в руке(золото) -->
-        <div id="PLAYER_BOX2">
-          <div class="d" id="0" align="left"></div>
-          <div class="d" id="1" align="left"></div>
-          <div class="d" id="2" align="left"></div>
-          <div class="d" id="3" align="left"></div>
-          <div class="d" id="4" align="left"></div>
-          <div class="d" id="5" align="left"></div>
-          <div class="d" id="6" align="left"></div>
-          <div class="d" id="7" align="left"></div>
-          <div class="d" id="8" align="left"></div>
-          <div class="d" id="9" align="left"></div>
-        </div>
+        <div id="PLAYER_BOX" align="left"></div>
+        <div id="PLAYER_BOX2"></div>
     </div>
-<!-- END -->
-    <!-- Статы игрока(правый верхний угол) -->
 <div class="name_">
   <div class="n1" id="player_name"></div>
   <div class="n1"><span id="lvl"></span>
-    <!-- Уровень игрока -->
     <button type="submit" onclick="UpLVL()">+1</button>
     <button type="submit" onclick="DownLVL()">-1</button>
   </div>
   <div class="n1"><span id="damage"></span>
-    <!-- Дамаг/урон игрока -->
     <button type="submit" onclick="UpDamage()">+1</button>
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
-  <!-- Кубик(рандомное число) -->
   <div class="n1">На кубике : <span id="kub"></span> <button onclick="Kub()" >Бросить кубик!</button> </div>
 </div>
+<!-- Колода -->
+<!-- <div id="rub">
+  <div class="holder">
+  <img  onclick="GetDoor()" src="public/brown/Дверь.jpg" >
+  <div class='block'>
+    <button onclick="KikDoor()">Вибить дверь</button>
+  </div>
+
+  </div>
+
+  <div class="holder">
+  <img  onclick="GetGold()" src="public/gold/Сокровище.png" >
+  <div class='block'>
+   <button>Взять в откритую</button>
+  </div>
+</div>
+</div> -->
 <!-- END -->
 
 <!-- <div class="table"> <span id="stol" ></span> </div> -->

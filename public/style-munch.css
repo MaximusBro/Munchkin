@@ -1,27 +1,21 @@
 body {
     /* overflow: hidden; */
-    background-image: url(public/img/фон.jpg);
+    background-image: url(img/fon.jpg);
     background-size: 100%;
    }
-   .drag { 
-   	position:relative; cursor:hand; z-index: 100; 
-   }
-   .d{
-     display: inline-block;
-   }
-   #card0 .d img{
+   #card0  img{
      width: 100px;
    }
-   #card1 .d img{
+   #card1  img{
      width: 100px;
    }
-   #card2 .d img{
+   #card2  img{
      width: 100px;
    }
    #CardInFront{
-     position: absolute;
+     position: relative;
      right:  10px;
-     top: 240px;
+     top: 0;
      /* border: 2px solid red; */
    }
    #PLAYER_BOX{
@@ -38,6 +32,7 @@ body {
    }
 
    #rub{
+     display: inline-block;
      margin-left: auto;
    	position: absolute;
     right: 550px;
@@ -57,21 +52,43 @@ body {
      font-size: 22px;
      border: 4px solid black;
    }
-   /* .table{
+
+   #fight{
      position: absolute;
-     right: 1%;
-     top: 1%;
-   	background-image: url(public/img/стол.jpg);
-   	background-size: 100%;
-   	border: 10px solid darkorange;
-   	padding: 150px;
-   	height: 80px;
-   	width: 200px;
-   	/* margin-left: 60%;
-   	margin-top: -40%; */
-   } */
-   #stol{
-     position:absolute;
-     left:30px;
-     bottom: 1%
+     display: inline-block;
+     top: 240px;
+     right: 5px;
    }
+   #fight img{
+     width: 150px;
+   }
+
+   .holder{
+     display: inline-block;
+      position:relative;
+      }
+    .block{
+      position:relative;
+      bottom: 200px;
+      display:none;
+      }
+    .holder:hover .block{
+      display:block;
+      }
+
+      #rub .holder{
+        display: inline-block;
+         position:relative;
+         }
+       #rub .block{
+         position:relative;
+         bottom: 180px;
+         display:none;
+         }
+       #rub .holder:hover .block{
+         display:block;
+         }
+
+    .playertabs{
+      width: 30%;
+    }

@@ -1,22 +1,27 @@
 var door = [];
 var gold = [];
 players = [];
+var fightdoor = [];
+var fightgold = [];
 var kub = [1,2,3,4,5,6]
 var start = false;
-for (var i = 1; i <= 73; i++) {
-  door.push(i + ".png")
-}
-for (var i = 1; i <= 74; i++) {
-  gold.push(i + ".png")
-}
-shuffle(door);
-shuffle(gold);
 module.exports = {
     //Експортовані модулі
+    setKolod:function () {
+      for (var i = 1; i <= 73; i++) {
+        door.push(i + ".jpg")
+      }
+      for (var i = 1; i <= 75; i++) {
+        gold.push(i + ".jpg")
+      }
+      shuffle(door);
+      shuffle(gold);
+      fightdoor = []
+      fightgold = []
+    },
     pushPlayer: function (object) {
       players.push(object);
     },
-
     removePlayer: function functionName(id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -24,15 +29,12 @@ module.exports = {
         }
       })
     },
-
     numPlayers:function functionName() {
       return players.length;
     },
-
     getInfo: function () {
         return players;
     },
-
     startGame: function () {
       players.forEach((item, a) => {
         for (var i = 0; i < 4; i++) {
@@ -44,7 +46,6 @@ module.exports = {
         item.start = true;
       })
     },
-
     getDoor: function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -53,7 +54,6 @@ module.exports = {
         }
       });
     },
-
     getGold: function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -62,7 +62,60 @@ module.exports = {
         }
       })
     },
-
+    kikDoor:function () {
+      fightdoor.push(door[0]);
+      door.shift();
+      return fightdoor;
+    },
+    kikGold:function () {
+      fightgold.push(gold[0]);
+      gold.shift();
+      return fightgold;
+    },
+    delDoorFigth:function (src) {
+      fightdoor.splice(fightdoor.indexOf(src),1)
+      return fightdoor;
+    },
+    delGoldFigth:function (src) {
+      fightgold.splice(fightgold.indexOf(src),1)
+      return fightgold;
+    },
+    TakeDoorFigth:function (src, id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.cardInHandDoor.push(src);
+        }
+      });
+    },
+    TakeGoldFigth:function (src, id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          item.cardInHandGold.push(src);
+        }
+      });
+    },
+    DoorToFigth:function (src, id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          fightdoor.push(src);
+          item.cardInHandDoor.splice(item.cardInHandDoor.indexOf(src),1);
+        }
+      });
+    },
+    GoldToFigth:function (src, id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          fightgold.push(src);
+          item.cardInHandGold.splice(item.cardInHandGold.indexOf(src),1);
+        }
+      });
+    },
+    getFigthDoor:function () {
+      return fightdoor;
+    },
+    getFigthGold:function () {
+      return fightgold;
+    },
     cardInFront: function (src_, id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -78,7 +131,24 @@ module.exports = {
         }
       })
     },
+    DeleteCardInFront: function (src, id) {
+      players.forEach((item, i) => {
+        if (id == item.id) {
+          console.log("Zashlo");
+          if (src.slice(0,12)=="public/gold/") {
+            var index =item.cardInFront.indexOf(src)
+            item.cardInFront.splice(index,1)
+            console.log(item);
+          }
 
+          else if(src.slice(0,13)=="public/brown/"){
+            var index =item.cardInFront.indexOf(src)
+            item.cardInFront.splice(index,1)
+            console.log(index);
+          }
+        }
+      })
+    },
     pushNick: function (nick,id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -87,7 +157,6 @@ module.exports = {
         }
       })
     },
-
     UpLvl: function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -95,7 +164,6 @@ module.exports = {
         }
       })
     },
-
     UpDamage: function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -103,7 +171,6 @@ module.exports = {
         }
       })
     },
-
     DownLvl:function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -111,7 +178,6 @@ module.exports = {
         }
       })
     },
-
     DownDamage:function (id) {
       players.forEach((item, i) => {
         if (id == item.id) {
@@ -119,18 +185,15 @@ module.exports = {
         }
       })
     },
-
-    getKub:function functionName() {
+    getKub:function() {
       shuffle(kub);
       return kub[0];
     },
-
     printPlayer: function () {
       players.forEach((item, i) => {
         console.log(item);
       })
     },
-
   }
   function shuffle(array) {
     array.sort(() => Math.random() - 0.5);

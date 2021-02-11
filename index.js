@@ -39,6 +39,7 @@ app.post("/munchkin", urlencodedParser, function (req, res) {
     password += pass[2];
     if(!req.body) return res.sendStatus(400);
     res.sendFile(__dirname + '/munch-front.html');
+    play.setKolod();
   }
     else {
       res.sendFile(__dirname + '/game.html');
@@ -102,35 +103,63 @@ io.on('connection', function(socket) {
       play.UpDamage(socket.id);
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('down_lvl',function () {
       play.DownLvl(socket.id);
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('down_damage',function () {
       play.DownDamage(socket.id);
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('get_door', function () {
       play.getDoor(socket.id)
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('get_gold', function () {
       play.getGold(socket.id)
       io.emit('set_info', play.getInfo());
     })
-
     socket.on('card_in_front',function (src_) {
       play.cardInFront(src_ ,socket.id);
       io.emit('set_info', play.getInfo());
       play.printPlayer();
     });
-
+    socket.on('kik_door',function () {
+      io.emit('send_kik_door', play.kikDoor());
+    })
+    socket.on('kik_gold',function () {
+      io.emit('send_kik_gold', play.kikGold());
+    })
+    socket.on('del_door_figth',function (src) {
+      io.emit('send_kik_door',play.delDoorFigth(src))
+    })
+    socket.on('del_gold_figth',function (src) {
+      io.emit('send_kik_gold',play.delGoldFigth(src))
+    })
+    socket.on('take_door_figth',function(src) {
+      play.TakeDoorFigth(src,socket.id);
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('take_gold_figth',function(src) {
+      play.TakeGoldFigth(src,socket.id);
+      io.emit('set_info', play.getInfo());
+    })
     socket.on('kub', function () {
       io.emit('set_kub',play.getKub());
+    })
+    socket.on('door_to_figth',function (src) {
+      play.DoorToFigth(src,socket.id);
+      io.emit('send_kik_door',play.getFigthDoor())
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('gold_to_figth',function (src) {
+      play.GoldToFigth(src,socket.id);
+      io.emit('send_kik_gold',play.getFigthGold())
+      io.emit('set_info', play.getInfo());
+    })
+    socket.on('delete_card_in_front',function (src) {
+      play.DeleteCardInFront(src, socket.id);
+      io.emit('set_info', play.getInfo());
     })
 
     socket.on('disconnect', function () {
