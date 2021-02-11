@@ -52,7 +52,7 @@ body {
      top: 5px;
    }
    .n1{
-     color: red;
+     color: #F5302D;
      font-size: 22px;
      border: 4px solid black;
    }
@@ -93,8 +93,14 @@ body {
          display:block;
          }
     .delCard{
-      border: 4px double red;
+      border: 4px double #F5302D;
       display: inline-block;
       position: relative;
       bottom: 2px;
     }
+    .scale {
+      transition: 1s; /* Время эффекта */
+     }
+     .scale:hover {
+      transform: scale(1.2); /* Увеличиваем масштаб */
+     }

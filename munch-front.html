@@ -11,10 +11,10 @@
 </head>
 <body>
 <!-- <h1 style="color: darkgoldenrod;" align = "center">Munchkin</h1> -->
-<p>Players - <span id ="players"></span></p>
+<p style="color: #F57123;">Players - <span id ="players" ></span></p>
 <div class="start">
 <button class="button-1" onclick="StartGame()">Начать игру</button>
-<div>Passwor : <span id="pass"></span> </div>
+<div style="color: #F57123;" >Password : <span id="pass"></span> </div>
 
   <form  method="post" onsubmit="return false;">
     <input type="text" name="nick" id="name_" placeholder="Введите ник"> <button type="submit" name="button" onclick="Send_nick($('#name_').val())" >Задать ник</button>
@@ -76,16 +76,16 @@
         <div id="PLAYER_BOX2"></div>
     </div>
 <div class="name_">
-  <div class="n1" id="player_name"></div>
-  <div class="n1"><span id="lvl"></span>
+  <div class="n1" id="player_name"style="color: #F57123;"></div>
+  <div class="n1"style="color: #F57123;"><span id="lvl"></span>
     <button type="submit" onclick="UpLVL()">+1</button>
     <button type="submit" onclick="DownLVL()">-1</button>
   </div>
-  <div class="n1"><span id="damage"></span>
+  <div class="n1"style="color: #F57123;"><span id="damage"></span>
     <button type="submit" onclick="UpDamage()">+1</button>
     <button type="submit" onclick="DownDamage()">-1</button>
   </div>
-  <div class="n1">На кубике : <span id="kub"></span> <button onclick="Kub()" >Бросить кубик!</button> </div>
+  <div class="n1" style="color: #F57123;">На кубике : <span id="kub"></span> <button onclick="Kub()"  >Бросить кубик!</button> </div>
 </div><br>
 <div class="delCard">
 </div>
