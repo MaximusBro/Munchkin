@@ -140,7 +140,7 @@ io.on('connection', function(socket) {
       play.DelToFight(src,socket.id);
       io.emit('send_kik_door', play.getFigthDoor());
       io.emit('send_kik_gold', play.getFigthGold());
-
+      io.emit('set_del_',play.getDel());
     })
     socket.on('del_del',function () {
       io.emit("del_del_")
